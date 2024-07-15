@@ -34,7 +34,7 @@
 
 
                     <div class="form-floating mt-3">
-                        <input class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan Nomor Whatsapp" required>
+                        <input type="tel" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan Nomor Whatsapp" required>
                         <label for="no_hp" class="form-label">No Whatsapp</label>
                     </div>
 

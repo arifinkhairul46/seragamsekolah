@@ -84,7 +84,7 @@ class SeragamController extends Controller
 
             $total_harga += $get_harga->harga_awal * $quantity;
             $total_diskon = 20/100 * $total_harga;
-            $harga_akhir = $total_harga - $total_diskon;
+            $harga_akhir = number_format($total_harga - $total_diskon);
        }
 
         $message = "Informasi Pemesanan Seragam Sekolah Rabbani

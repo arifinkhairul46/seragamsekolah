@@ -22,6 +22,7 @@
             document.body.appendChild(textArea);
             textArea.select();
             document.execCommand("Copy");
+            alert("No rekening berhasil disalin");
             textArea.remove();
         }
 
@@ -49,7 +50,7 @@
         </div>
     </div>
  
-    <div class="mt-5">
+    <div class="mt-5 px-3">
         <table class="w-full">
             <tr>
                 <td>
@@ -70,18 +71,18 @@
         </table>
     </div>
  
-    <div class="mt-4">
+    <div class="my-4 px-3">
         <table class="table table-stripped">
             <thead >
                 <tr>
                     <th class="bg-thead">No</th>
-                    <th class="bg-thead">Deskrips Item</th>
+                    <th class="bg-thead">Deskripsi Item</th>
                     <th class="bg-thead">Harga</th>
-                    <th class="bg-thead">Jumlah</th>
-                    <th class="bg-thead">Total</th>
+                    <th class="bg-thead" style="width: 8%">Jumlah</th>
+                    <th class="bg-thead" style="width: 25%">Total</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="font-size: 13px">
                 <?php $total_harga = 0; ?>
                 @foreach($detail_pesan as $item)
                 
@@ -109,27 +110,25 @@
                 <input type="text" style="display: none" value="{{ 80/100 * $total_harga}}" id="harga_akhir">
                 <tr>
                     <td colspan="3"></td>
-                    <td><h6>Sub Total</h6></td>
-                    <td id="total_harga" colspan="2"><h6>Rp {{number_format($total_harga)}} </h6></td>
+                    <td><span style="font-size: 13px">Sub Total</span></td>
+                    <td id="total_harga" colspan="2"><span style="font-size: 13px">Rp {{number_format($total_harga)}} </span></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                    <td><h6>Diskon 20%</h6></td>
-                    <td id="diskon" colspan="2"><h6>Rp {{number_format(20/100 * $total_harga)}}</h6></td>
+                    <td><span style="font-size: 13px">Diskon 20%</span></td>
+                    <td id="diskon" colspan="2"><span style="font-size: 13px">Rp {{number_format(20/100 * $total_harga)}}</span></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                    <td><h6>Total Harga</h6></td>
-                    <td colspan="2"><h6 >Rp {{number_format(80/100 * $total_harga)}} <button style="border: none" id="copy_harga"> <i class="fa solid fa-copy" onclick="copy_harga()" title="salin"> </i> </button> </h6></td>
+                    <td><span style="font-size: 13px">Total Harga</span></td>
+                    <td colspan="2"><span style="font-size: 13px"><b>Rp {{number_format(80/100 * $total_harga)}} </b> <button style="border: none" id="copy_harga"> <i class="fa solid fa-copy" onclick="copy_harga()" title="salin"> </i> </button> </span></td>
                 </tr>
             </tbody>
         </table>
     </div>
-
-
  
-    <div class="d-flex" style="justify-content: space-between">
-        <div class="konfirmasi" style=" font-size: 13px">
+    <div class="d-flex px-3" style="justify-content: space-between">
+        <div class="konfirmasi" style=" font-size: 12px">
             <p class="mb-1"> <b>Konfirmasi Pembayaran</b> </p>
             <span > CCRS Sekolah Rabbani </span> <br>
             <a href="https://wa.me/+6285173273274"> +62 851-7327-3274 </a>
@@ -137,15 +136,15 @@
 
         <div></div>
 
-        <div class="tf_bayar" style="font-size: 13px">
+        <div class="tf_bayar" style="font-size: 12px">
             <span> Kirim <i>Transfer</i> ke </span>
             <p class="mb-0"><b> Bank Syariah Indonesia (BSI) </b> </p>
-            <span id="no_rek_seragam"> 7700700218 <button style="border: none" id="copy_rek"> <i  class="fa solid fa-copy" onclick="copy_rek()" title="salin"> </i></button></span>
+            <span id="no_rek_seragam">7700700218<button style="border: none" id="copy_rek"> <i  class="fa solid fa-copy" onclick="copy_rek()" title="salin"> </i></button></span>
             <p> an. <b>Seragam Sekolah Rabbani</b> </p>
         </div>
     </div>
 
-    <div class="mb-4">Terimakasih</div>
+    <div class="my-4 px-3">Terimakasih</div>
  
     <div class="footer-invoice bg-thead">
         <div class="d-flex p-2" style="justify-content: space-between; background-color:#3FA2F6">
