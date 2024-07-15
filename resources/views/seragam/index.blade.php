@@ -76,7 +76,6 @@
                                                 <span>    XL </span>
                                             </label>
                                         </div>
-
                                     </div>
                                     <span class="mb-0 text-danger" style="font-size: 10px; display: none" id="valid_ukuran_{{$item->id}}" > Pilih ukuran terlebih dahulu! </span>
 
@@ -148,7 +147,30 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn btn-primary btn-sm mt-2 px-3">Add to Cart</a>
+                                    <span class="mb-0 text-danger" style="font-size: 10px; display: none" id="valid_ukuran_{{$item->id}}" > Pilih ukuran terlebih dahulu! </span>
+
+                                    <button type="button"  class="btn btn-primary btn-sm mt-2 px-3" id="btn-order-{{$item->id}}" onclick="openModal({{$item->id}})">Add to Cart</button>
+                                    <button type="button" class="btn btn-sm btn-danger mt-2 remove-btn" id="remove-btn-{{$item->id}}" style="display: none"><i class="fas fa-trash" aria-hidden="true"></i> Remove Cart</button>
+
+                                    
+                                    <div class="quantity" id="quantity_{{$item->id}}" style="display: none">
+                                        <div class="d-flex  mt-3">
+                                            <p class="mt-1" style="font-size: 13px"> Jumlah </p>
+                                            <div class="input-group" style="border: none; justify-content:end">
+                                                <div class="button minus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" disabled="disabled" data-type="minus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="quant[{{$item->id}}]" id="quant_{{$item->id}}" class="input-number" min="1" max="10">
+                                                <div class="button plus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" data-type="plus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             @endif
@@ -194,7 +216,30 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-primary btn-sm mt-2 px-3">Add to Cart</a>
+                                    <span class="mb-0 text-danger" style="font-size: 10px; display: none" id="valid_ukuran_{{$item->id}}" > Pilih ukuran terlebih dahulu! </span>
+
+                                    <button type="button"  class="btn btn-primary btn-sm mt-2 px-3" id="btn-order-{{$item->id}}" onclick="openModal({{$item->id}})">Add to Cart</button>
+                                    <button type="button" class="btn btn-sm btn-danger mt-2 remove-btn" id="remove-btn-{{$item->id}}" style="display: none"><i class="fas fa-trash" aria-hidden="true"></i> Remove Cart</button>
+
+                                    
+                                    <div class="quantity" id="quantity_{{$item->id}}" style="display: none">
+                                        <div class="d-flex  mt-3">
+                                            <p class="mt-1" style="font-size: 13px"> Jumlah </p>
+                                            <div class="input-group" style="border: none; justify-content:end">
+                                                <div class="button minus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" disabled="disabled" data-type="minus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="quant[{{$item->id}}]" id="quant_{{$item->id}}" class="input-number" min="1" max="10">
+                                                <div class="button plus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" data-type="plus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             @endif

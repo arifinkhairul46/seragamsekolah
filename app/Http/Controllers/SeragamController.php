@@ -21,7 +21,7 @@ class SeragamController extends Controller
     {
         $lokasi = Sekolah::where('status', 1)->get();
         $produk_seragam = ProdukSeragam::all();
-        return view('seragam.tutup', compact('lokasi', 'produk_seragam'));
+        return view('seragam.index', compact('lokasi', 'produk_seragam'));
     }
 
     /**
@@ -84,7 +84,7 @@ class SeragamController extends Controller
 
             $total_harga += $get_harga->harga_awal * $quantity;
             $total_diskon = 20/100 * $total_harga;
-            $harga_akhir = $total_harga-$total_diskon;
+            $harga_akhir = $total_harga - $total_diskon;
        }
 
         $message = "Informasi Pemesanan Seragam Sekolah Rabbani
@@ -111,7 +111,7 @@ Jika Anda memiliki pertanyaan atau membutuhkan bantuan lebih lanjut, silahkan bi
 
 Terima kasih atas kepercayaan *Ayah/Bunda $nama_siswa*.🙏☺";
 
-        // $send_notif = $this->send_notif($no_hp, $message);
+        $send_notif = $this->send_notif($no_hp, $message);
 
 
         return redirect()->route('invoice', $no_pesanan)->with('success', 'Terimakasih telah melakukan pemesanan seragam');

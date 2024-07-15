@@ -5,12 +5,36 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invoice</title>
+    <link href="{{ asset('assets/images/logo_rsu.png') }}" rel="icon" type="image/jpg">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css?v=').time() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"  type='text/css'>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
     <script src="{{ asset('assets/js/script.js') }}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function copy_rek () {
+            var copyText = document.getElementById("no_rek_seragam");
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("Copy");
+            textArea.remove();
+        }
+
+        function copy_harga () {
+            var hidden = document.getElementById("harga_akhir");
+            hidden.style.display = 'block';
+            hidden.select();
+            hidden.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Nominal berhasil disalin");
+            hidden.style.display = 'none';
+        }
+    </script>
 
 </head>
 <body>
@@ -71,15 +95,18 @@
                     <td>
                         {{ number_format($item->harga_awal) }}
                     </td>
-                    <td>
+                    <td style="text-align: center">
                         {{ $item->quantity }}
                     </td>
                     <td>
-                        {{ number_format($item->harga_awal *  $item->quantity)}}
+                        Rp {{ number_format($item->harga_awal *  $item->quantity)}}
                     </td>
                 </tr>
                 <?php $total_harga += $item->harga_awal * $item->quantity; ?>
+
+                
                 @endforeach
+                <input type="text" style="display: none" value="{{ 80/100 * $total_harga}}" id="harga_akhir">
                 <tr>
                     <td colspan="3"></td>
                     <td><h6>Sub Total</h6></td>
@@ -87,13 +114,13 @@
                 </tr>
                 <tr>
                     <td colspan="3"></td>
-                    <td><h6>Diskon</h6></td>
-                    <td id="diskon" colspan="2"><h6>Rp - {{number_format(20/100 * $total_harga)}} </h6></td>
+                    <td><h6>Diskon 20%</h6></td>
+                    <td id="diskon" colspan="2"><h6>Rp {{number_format(20/100 * $total_harga)}}</h6></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
                     <td><h6>Total Harga</h6></td>
-                    <td id="harga_akhir" colspan="2"><h6>Rp {{number_format(80/100 * $total_harga)}} </h6></td>
+                    <td colspan="2"><h6 >Rp {{number_format(80/100 * $total_harga)}} <button style="border: none" id="copy_harga"> <i class="fa solid fa-copy" onclick="copy_harga()" title="salin"> </i> </button> </h6></td>
                 </tr>
             </tbody>
         </table>
@@ -101,19 +128,19 @@
 
 
  
-    <div class="d-flex">
-        <div class="konfirmasi" style="justify-content: start; font-size: 13px">
+    <div class="d-flex" style="justify-content: space-between">
+        <div class="konfirmasi" style=" font-size: 13px">
             <p class="mb-1"> <b>Konfirmasi Pembayaran</b> </p>
-            <span > CCRS Sekolah Rabbani </span>
-            <p> +62 851-7327-3274 </p>
+            <span > CCRS Sekolah Rabbani </span> <br>
+            <a href="https://wa.me/+6285173273274"> +62 851-7327-3274 </a>
         </div>
 
         <div></div>
 
-        <div class="tf_bayar" style="justify-content: end; font-size: 13px">
+        <div class="tf_bayar" style="font-size: 13px">
             <span> Kirim <i>Transfer</i> ke </span>
             <p class="mb-0"><b> Bank Syariah Indonesia (BSI) </b> </p>
-            <span id="no_rek_seragam"> 7700700218 </span>
+            <span id="no_rek_seragam"> 7700700218 <button style="border: none" id="copy_rek"> <i  class="fa solid fa-copy" onclick="copy_rek()" title="salin"> </i></button></span>
             <p> an. <b>Seragam Sekolah Rabbani</b> </p>
         </div>
     </div>
