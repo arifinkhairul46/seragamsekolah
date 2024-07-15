@@ -654,6 +654,29 @@ main {
     line-height: 1.8em;
     }
 
+    .bg-thead {
+        background-color: #3FA2F6 !important;
+        color: white !important;
+    }
+
+    .footer-invoice {
+        
+    }
+
+    @media print {
+        .bg-tk {
+            background-color: #EB3C97 !important;
+            print-color-adjust: exact; 
+            -webkit-print-color-adjust: exact;
+        }
+
+        .bg-thead {
+            background-color: #3FA2F6 !important;
+            color: white !important;
+            print-color-adjust: exact; 
+            -webkit-print-color-adjust: exact;
+        }
+    }
   
   
   

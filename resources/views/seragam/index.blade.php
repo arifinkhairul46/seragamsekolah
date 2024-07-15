@@ -25,22 +25,17 @@
         <img class="center mt-3" src="{{ asset('assets/images/biodata.png') }}" alt="biodata" width="30%">
         <div class="row mx-auto">
             <div class="col-md">
-                {{-- <h6 class="mt-1" style="color: #ED145B">Pemesanan</h6>
-                <h4 class="mb-3">Seragam Siswa</h4>
-                <div class="text" style="text-align: right">
-                    <button class="btn btn-blue"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
-                </div> --}}
-                <form action="#"  method="POST">
+                <form action="{{route('seragam.store')}}"  method="POST">
                     @csrf
                     <div class="form-floating mt-3">
                         <input class="form-control form-control-sm" id="nama_pemesan" name="nama_pemesan" placeholder="Masukkan Nama Pemesan" required>
-                        <label for="nama_pemesan" class="form-label">Nama Pemesan</label>
+                        <label for="nama_pemesan" class="form-label">Nama Ayah/Bunda</label>
                     </div>
 
 
                     <div class="form-floating mt-3">
                         <input class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan Nomor Whatsapp" required>
-                        <label for="no_hp" class="form-label">No HP</label>
+                        <label for="no_hp" class="form-label">No Whatsapp</label>
                     </div>
 
                     <div class="center my-4">
@@ -81,28 +76,33 @@
                                                 <span>    XL </span>
                                             </label>
                                         </div>
+
                                     </div>
-                                    <button type="button"  class="btn btn-primary btn-sm mt-2 px-3" onclick="openModal({{$item->id}})">Add to Cart</button>
+                                    <span class="mb-0 text-danger" style="font-size: 10px; display: none" id="valid_ukuran_{{$item->id}}" > Pilih ukuran terlebih dahulu! </span>
+
+                                    <button type="button"  class="btn btn-primary btn-sm mt-2 px-3" id="btn-order-{{$item->id}}" onclick="openModal({{$item->id}})">Add to Cart</button>
+                                    <button type="button" class="btn btn-sm btn-danger mt-2 remove-btn" id="remove-btn-{{$item->id}}" style="display: none"><i class="fas fa-trash" aria-hidden="true"></i> Remove Cart</button>
+
                                     
-                                    <div class="d-flex quantity mt-3">
-                                        <p class="mt-1" style="font-size: 13px"> Jumlah </p>
-                                        <div class="input-group" style="border: none; justify-content:end">
-                                            <div class="button minus">
-                                                <button type="button" class="btn btn-outline-plus-minus" disabled="disabled" data-type="minus" data-field="quant[]">
-                                                    <i class="fas fa-minus-circle"></i>
-                                                </button>
-                                            </div>
-                                            <input type="text" name="quant[]" class="input-number"  data-min="1" data-max="100" value="">
-                                            <input type="hidden" name="qty_id[]" value="">
-                                            <div class="button plus">
-                                                <button type="button" class="btn btn-outline-plus-minus" data-type="plus" data-field="quant[]">
-                                                    <i class="fas fa-plus-circle"></i>
-                                                </button>
+                                    <div class="quantity" id="quantity_{{$item->id}}" style="display: none">
+                                        <div class="d-flex  mt-3">
+                                            <p class="mt-1" style="font-size: 13px"> Jumlah </p>
+                                            <div class="input-group" style="border: none; justify-content:end">
+                                                <div class="button minus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" disabled="disabled" data-type="minus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="quant[{{$item->id}}]" id="quant_{{$item->id}}" class="input-number" min="1" max="10">
+                                                {{-- <input type="hidden" name="qty_id[]" value=""> --}}
+                                                <div class="button plus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" data-type="plus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <a href="#"  class="btn btn-primary btn-sm mt-2">Add to Cart</a> --}}
-
                                 </div>
                             </div>
                             @endif
@@ -148,7 +148,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn btn-primary btn-sm mt-2">Add Cart</a>
+                                    <a href="#" class="btn btn-primary btn-sm mt-2 px-3">Add to Cart</a>
                                 </div>
                             </div>
                             @endif
@@ -194,12 +194,14 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-primary btn-sm mt-2">Add Cart</a>
+                                    <button type="button" class="btn btn-primary btn-sm mt-2 px-3">Add to Cart</a>
                                 </div>
                             </div>
                             @endif
                         @endforeach
                     </div>
+
+                    <input type="hidden" name="data" id="data" value="">
 
                     <div class="mt-3 center">
                         <button type="submit" class="btn btn-primary"> Submit </button>
@@ -212,11 +214,89 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
 
+        $('.btn-number').click(function(e){
+            e.preventDefault();
+            
+            fieldName = $(this).attr('data-field');
+            type      = $(this).attr('data-type');
+            var input = $("input[name='"+fieldName+"']");
+            var currentVal = parseInt(input.val());
+            if (!isNaN(currentVal)) {
+                if(type == 'minus') {
+                    
+                    if(currentVal > input.attr('min')) {
+                        input.val(currentVal - 1).change();
+                    } 
+                    if(parseInt(input.val()) == input.attr('min')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                } else if(type == 'plus') {
+
+                    if(currentVal < input.attr('max')) {
+                        input.val(currentVal + 1).change();
+                    }
+                    if(parseInt(input.val()) == input.attr('max')) {
+                        $(this).attr('disabled', true);
+                    }
+
+                }
+            } else {
+                input.val(0);
+            }
+        });
+        $('.input-number').focusin(function(){
+        $(this).data('oldValue', $(this).val());
+        });
+        $('.input-number').change(function() {
+            
+            minValue =  parseInt($(this).attr('min'));
+            maxValue =  parseInt($(this).attr('max'));
+            valueCurrent = parseInt($(this).val());
+            
+            name = $(this).attr('name');
+            if(valueCurrent >= minValue) {
+                $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the minimum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+            if(valueCurrent <= maxValue) {
+                $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+            } else {
+                alert('Sorry, the maximum value was reached');
+                $(this).val($(this).data('oldValue'));
+            }
+            
+            
+        });
+        $(".input-number").keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) || 
+                    // Allow: home, end, left, right
+                    (e.keyCode >= 35 && e.keyCode <= 39)) {
+                        // let it happen, don't do anything
+                        return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+        });
+
         var pesanan = [];
 
         function openModal(item_id) {
-            $("#produk_id_terpilih").val(item_id);
-            $('#form_detail').modal('show');
+            var ukuran = $('input[name="ukuran_'+item_id+'"]:checked').val();
+            if (ukuran == '' || ukuran == null || ukuran == undefined) {
+                $('#valid_ukuran_'+item_id).show();
+            } else {
+                $("#produk_id_terpilih").val(item_id);
+                $('#valid_ukuran_'+item_id).hide();
+                $('#form_detail').modal('show');
+            }
         }
 
         function addToCart() {
@@ -225,11 +305,33 @@
             var ukuran = $('input[name="ukuran_'+item_id+'"]:checked').val();
             new_pesanan['nama_siswa'] = $("#nama_siswa").val();
             new_pesanan['kelas'] = $("#kelas").val();
+            new_pesanan['lokasi'] = $("#lokasi").val();
             new_pesanan['produk_id'] = item_id;
             new_pesanan['ukuran'] = ukuran;
             pesanan.push(new_pesanan);
-            console.log(pesanan);
+            // console.log(pesanan);
             $('#form_detail').modal('hide');
+            $('#quantity_'+item_id).show();
+            $('#quant_'+item_id).val(1);
+
+            $('#data').val(JSON.stringify(pesanan));
+            $('#btn-order-'+item_id).hide();
+
+            $('#remove-btn-'+item_id).show();
+            $('#remove-btn-'+item_id).attr('onclick', "remove_cart('"+item_id+"')");
+
+        }
+
+        function remove_cart (item_id) {
+            pesanan = pesanan.filter(data => data.produk_id !== item_id);
+            $('#btn-order-'+item_id).show();
+            $('#remove-btn-'+item_id).hide();
+            $('#quantity_'+item_id).hide();
+
+
+            $('#data').val(JSON.stringify(pesanan));
+            // console.log(pesanan);
+
         }
       
     </script>
@@ -249,18 +351,18 @@
 
                 <div class="form-floating mt-3">
                     <select name="lokasi" id="lokasi" class="form-control" required>
-                        <option value="" disabled selected>-- Pilih Lokasi --</option>
+                        <option value="" disabled selected>-- Pilih Sekolah --</option>
                         @foreach ($lokasi as $item)
-                            <option value="{{ $item->kode_sekolah }}"> {{ $item->nama_sekolah }}</option>
+                            <option value="{{ $item->id_lokasi }}"> {{ $item->sublokasi }}</option>
                         @endforeach
                     </select>
-                    <label for="lokasi" class="form-label">Lokasi</label>
+                    <label for="lokasi" class="form-label">Sekolah</label>
 
                 </div>
 
                 <div class="form-floating mt-3">
                     <input class="form-control" id="kelas" name="kelas" placeholder="Kelas" required>
-                    <label for="kelas" class="form-label">Nama Kelas</label>
+                    <label for="kelas" class="form-label">Nama Kelas (contoh: 2 Badar)</label>
                 </div>
 
                 <input type="hidden" id="produk_id_terpilih">

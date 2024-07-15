@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [SeragamController::class, 'index'])->name('seragam.index');
+Route::post('/', [SeragamController::class, 'store'])->name('seragam.store');
+
 Route::get('/invoice/{id}', [SeragamController::class, 'invoice'])->name('invoice');
