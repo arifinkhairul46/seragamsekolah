@@ -19,7 +19,7 @@ class SeragamController extends Controller
      */
     public function index()
     {
-        $lokasi = Sekolah::where('status', 1)->get();
+        $lokasi = Sekolah::select('id as kode_lokasi', 'sublokasi')->where('status', 1)->get();
         $produk_seragam = ProdukSeragam::all();
         return view('seragam.index', compact('lokasi', 'produk_seragam'));
     }
@@ -68,7 +68,8 @@ class SeragamController extends Controller
            $quantity = $request->quant[$produk_id];
 
            $get_harga = ProdukSeragam::select('harga_awal')->where('id', $produk_id)->first();
-           $get_lokasi = Lokasi::select('nama_sekolah')->where('kode_sekolah', $lokasi)->first();
+        //    $get_lokasi = Lokasi::select('nama_sekolah')->where('kode_sekolah', $lokasi)->first();
+           $get_sekolah = Sekolah::where('id', $lokasi)->first();
 
             $order_detail = DetailOrderSeragam::create([
                 'no_pemesanan' => $no_pesanan,
@@ -94,7 +95,7 @@ Terima kasih Ayah/Bunda $nama_siswa telah melakukan pemesanan Seragam.🙏☺
 Berikut adalah detail pemesanan Anda:
 
 Nama Pemesan: *$nama_pemesan*
-Cabang Sekolah : *$get_lokasi->nama_sekolah*
+Cabang Sekolah : *$get_sekolah->sublokasi*
 Total Pembayaran: *Rp. $harga_akhir*
 
 Berikut Rekening Pembayaran Pemesanan Seragam :

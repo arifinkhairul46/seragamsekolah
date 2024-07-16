@@ -657,6 +657,9 @@ main {
     .bg-thead {
         background-color: #3FA2F6 !important;
         color: white !important;
+        text-align: center;
+        font-size: 14px;
+        vertical-align: middle;
     }
 
     .footer-invoice {

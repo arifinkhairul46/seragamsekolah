@@ -73,7 +73,7 @@
                                         <div class="button-ukuran">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
-                                                <span>    XL </span>
+                                                <span>XL</span>
                                             </label>
                                         </div>
                                     </div>
@@ -194,25 +194,100 @@
                                         <div class="button-ukuran">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
-                                            <span>S </span>
+                                            <span>S</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
                                             <label class="form-check-label" for="uk_m_{{$item->id}}">
-                                            <span>M </span>
+                                            <span>M</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
                                             <label class="form-check-label" for="uk_l_{{$item->id}}">
-                                            <span>L </span>
+                                            <span>L</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
-                                                <span>    XL </span>
+                                                <span>XL</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <span class="mb-0 text-danger" style="font-size: 10px; display: none" id="valid_ukuran_{{$item->id}}" > Pilih ukuran terlebih dahulu! </span>
+
+                                    <button type="button"  class="btn btn-primary btn-sm mt-2 px-3" id="btn-order-{{$item->id}}" onclick="openModal({{$item->id}})">Add to Cart</button>
+                                    <button type="button" class="btn btn-sm btn-danger mt-2 remove-btn" id="remove-btn-{{$item->id}}" style="display: none"><i class="fas fa-trash" aria-hidden="true"></i> Remove Cart</button>
+
+                                    
+                                    <div class="quantity" id="quantity_{{$item->id}}" style="display: none">
+                                        <div class="d-flex  mt-3">
+                                            <p class="mt-1" style="font-size: 13px"> Jumlah </p>
+                                            <div class="input-group" style="border: none; justify-content:end">
+                                                <div class="button minus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" disabled="disabled" data-type="minus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                    </button>
+                                                </div>
+                                                <input type="text" name="quant[{{$item->id}}]" id="quant_{{$item->id}}" class="input-number" min="1" max="10">
+                                                <div class="button plus">
+                                                    <button type="button" class="btn btn-outline-plus-minus btn-number" data-type="plus" data-field="quant[{{$item->id}}]">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                    </div>
+
+                    <div class="center my-4">
+                        <img src="{{ asset('assets/images/katalog_produk_bani.png') }}" alt="discount" width="75%">
+                    </div>
+
+                    <div class="d-grid-card" >
+                        @foreach ($produk_seragam as $item)
+                            @if($item->jenjang_id == 5)
+                            <div class="card">
+                                <img src="{{ asset('assets/images/'.$item->image) }}" class="card-img-top" alt="{{$item->image}}">
+                                <div class="card-body center">
+                                    <h6 class="card-title ">{{$item->nama_produk}}</h6>
+                                    <p> Rp. {{number_format($item->harga_awal)}} </p>
+                                    <span> Ukuran </span>
+                                    <div class="d-flex">
+                                        <div class="button-ukuran">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_xs_{{$item->id}}" value="xs">
+                                            <label class="form-check-label" for="uk_xs_{{$item->id}}">
+                                            <span>XS</span>
+                                            </label>
+                                        </div>
+                                        <div class="button-ukuran">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
+                                            <label class="form-check-label" for="uk_s_{{$item->id}}">
+                                            <span>S</span>
+                                            </label>
+                                        </div>
+                                        <div class="button-ukuran">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
+                                            <label class="form-check-label" for="uk_m_{{$item->id}}">
+                                            <span>M</span>
+                                            </label>
+                                        </div>
+                                        <div class="button-ukuran">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
+                                            <label class="form-check-label" for="uk_l_{{$item->id}}">
+                                            <span>L</span>
+                                            </label>
+                                        </div>
+                                        <div class="button-ukuran">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
+                                            <label class="form-check-label" for="uk_xl_{{$item->id}}">
+                                                <span>XL</span>
                                             </label>
                                         </div>
                                     </div>
@@ -249,7 +324,7 @@
                     <input type="hidden" name="data" id="data" value="">
 
                     <div class="mt-3 center">
-                        <button type="submit" class="btn btn-primary"> Submit </button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit" onclick="submit()"> Submit </button>
                     </div>
                 </form>
             </div>
@@ -378,6 +453,10 @@
             // console.log(pesanan);
 
         }
+
+        function submit() {
+            $('#btn-submit').hide();
+        }
       
     </script>
 @endsection
@@ -398,7 +477,7 @@
                     <select name="lokasi" id="lokasi" class="form-control" required>
                         <option value="" disabled selected>-- Pilih Sekolah --</option>
                         @foreach ($lokasi as $item)
-                            <option value="{{ $item->id_lokasi }}"> {{ $item->sublokasi }}</option>
+                            <option value="{{ $item->kode_lokasi }}"> {{ $item->sublokasi }}</option>
                         @endforeach
                     </select>
                     <label for="lokasi" class="form-label">Sekolah</label>
