@@ -121,8 +121,8 @@
                                     <h6 class="card-title ">{{$item->nama_produk}}</h6>
                                     <p> Rp. {{number_format($item->harga_awal)}} </p>
                                     <span> Ukuran </span>
-                                    <div class="d-flex" style="justify-content: space-between">
-                                        <div class="button-ukuran">
+                                    <div class="d-flex" style="justify-content: center">
+                                        <div class="button-ukuran" >
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
                                             <span>    S </span>
@@ -190,7 +190,7 @@
                                     <h6 class="card-title ">{{$item->nama_produk}}</h6>
                                     <p> Rp. {{number_format($item->harga_awal)}} </p>
                                     <span> Ukuran </span>
-                                    <div class="d-flex">
+                                    <div class="d-flex" style="justify-content: center">
                                         <div class="button-ukuran">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
@@ -259,7 +259,7 @@
                                     <h6 class="card-title ">{{$item->nama_produk}}</h6>
                                     <p> Rp. {{number_format($item->harga_awal)}} </p>
                                     <span> Ukuran </span>
-                                    <div class="d-flex">
+                                    <div class="d-flex" style="justify-content: center">
                                         <div class="button-ukuran btn-bani">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_xs_{{$item->id}}" value="xs">
                                             <label class="form-check-label" for="uk_xs_{{$item->id}}">
