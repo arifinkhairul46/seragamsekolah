@@ -25,7 +25,7 @@
         <img class="center mt-3" src="{{ asset('assets/images/biodata.png') }}" alt="biodata" width="30%">
         <div class="row mx-auto">
             <div class="col-md">
-                <form action="{{route('seragam.store')}}"  method="POST">
+                <form action="{{route('seragam.store')}}"  method="POST" id="simpan_seragam">
                     @csrf
                     <div class="form-floating mt-3">
                         <input class="form-control form-control-sm" id="nama_pemesan" name="nama_pemesan" placeholder="Masukkan Nama Pemesan" required>
@@ -324,7 +324,7 @@
                     <input type="hidden" name="data" id="data" value="">
 
                     <div class="mt-3 center">
-                        <button type="submit" class="btn btn-primary" id="btn-submit" onclick="submit()"> Submit </button>
+                        <button type="submit" class="btn btn-primary" id="btn-submit"> Submit </button>
                     </div>
                 </form>
             </div>
@@ -423,23 +423,37 @@
             var new_pesanan = {};
             var item_id = $("#produk_id_terpilih").val();
             var ukuran = $('input[name="ukuran_'+item_id+'"]:checked').val();
-            new_pesanan['nama_siswa'] = $("#nama_siswa").val();
-            new_pesanan['kelas'] = $("#kelas").val();
-            new_pesanan['lokasi'] = $("#lokasi").val();
-            new_pesanan['produk_id'] = item_id;
-            new_pesanan['ukuran'] = ukuran;
-            pesanan.push(new_pesanan);
-            // console.log(pesanan);
-            $('#form_detail').modal('hide');
-            $('#quantity_'+item_id).show();
-            $('#quant_'+item_id).val(1);
+            var nama = $("#nama_siswa").val();
+            var lokasi = $("#lokasi").val();
+            var kelas = $("#kelas").val();
+            if (nama == '') {
+                $('#alert_nama').show()
+            } else if (lokasi == null) {
+                $('#alert_sekolah').show()
+            } else if (kelas == '') {
+                $('#alert_kelas').show()
+            } else {
+                new_pesanan['nama_siswa'] = $("#nama_siswa").val();
+                new_pesanan['kelas'] = $("#kelas").val();
+                new_pesanan['lokasi'] = $("#lokasi").val();
+                new_pesanan['produk_id'] = item_id;
+                new_pesanan['ukuran'] = ukuran;
+                pesanan.push(new_pesanan);
+                // console.log(pesanan);
+                $('#alert_nama').hide()
+                $('#alert_sekolah').hide()
+                $('#alert_kelas').hide()
 
-            $('#data').val(JSON.stringify(pesanan));
-            $('#btn-order-'+item_id).hide();
-
-            $('#remove-btn-'+item_id).show();
-            $('#remove-btn-'+item_id).attr('onclick', "remove_cart('"+item_id+"')");
-
+                $('#form_detail').modal('hide');
+                $('#quantity_'+item_id).show();
+                $('#quant_'+item_id).val(1);
+    
+                $('#data').val(JSON.stringify(pesanan));
+                $('#btn-order-'+item_id).hide();
+    
+                $('#remove-btn-'+item_id).show();
+                $('#remove-btn-'+item_id).attr('onclick', "remove_cart('"+item_id+"')");
+            }
         }
 
         function remove_cart (item_id) {
@@ -454,9 +468,18 @@
 
         }
 
-        function submit() {
-            $('#btn-submit').hide();
-        }
+
+        $(document).ready(function() {
+            $("#btn-submit").click(function() {
+                // disable button
+                $(this).prop("disabled", true);
+                // add spinner to button
+                $(this).html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+                );
+                $("#simpan_seragam").submit();
+            });
+        });
       
     </script>
 @endsection
@@ -471,6 +494,7 @@
                 <div class="form-floating mt-3">
                         <input class="form-control" id="nama_siswa" name="nama_siswa" placeholder="Masukkan Nama Siswa" required>
                         <label for="nama_siswa" class="form-label">Nama Siswa</label>
+                        <span id="alert_nama" class="text-danger" style="font-size: 10px; display:none;">Isi nama terlebih dahulu </span>
                 </div>
 
                 <div class="form-floating mt-3">
@@ -481,12 +505,13 @@
                         @endforeach
                     </select>
                     <label for="lokasi" class="form-label">Sekolah</label>
-
+                    <span id="alert_sekolah" class="text-danger" style="font-size: 10px; display:none;">Isi Sekolah terlebih dahulu </span>
                 </div>
 
                 <div class="form-floating mt-3">
                     <input class="form-control" id="kelas" name="kelas" placeholder="Kelas" required>
                     <label for="kelas" class="form-label">Nama Kelas (contoh: 2 Badar)</label>
+                    <span id="alert_kelas" class="text-danger" style="font-size: 10px; display:none;">Isi Kelas terlebih dahulu </span>
                 </div>
 
                 <input type="hidden" id="produk_id_terpilih">

@@ -42,6 +42,11 @@ class SeragamController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_pemesan' => 'required',
+            'no_hp' => 'required',
+        ]);
+
         $order = $request->all();
 
         $no_pesanan = 'INV-RSU-'. date('YmdHis');
@@ -94,6 +99,7 @@ Terima kasih Ayah/Bunda $nama_siswa telah melakukan pemesanan Seragam.🙏☺
 
 Berikut adalah detail pemesanan Anda:
 
+No invoice: *$no_pesanan*
 Nama Pemesan: *$nama_pemesan*
 Cabang Sekolah : *$get_sekolah->sublokasi*
 Total Pembayaran: *Rp. $harga_akhir*
