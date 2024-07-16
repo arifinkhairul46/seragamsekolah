@@ -619,6 +619,15 @@ main {
     }
   }
 
+  .btn-bani {
+    float: left;
+    background-color: #F0F0F0;
+    margin: 0 4px 0 0 !important;
+    width: 24px !important;
+    height: 27px !important;
+    position: relative;
+    }
+
   .button-ukuran {
     float: left;
     background-color: #F0F0F0;

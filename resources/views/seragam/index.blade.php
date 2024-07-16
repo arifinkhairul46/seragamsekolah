@@ -260,34 +260,34 @@
                                     <p> Rp. {{number_format($item->harga_awal)}} </p>
                                     <span> Ukuran </span>
                                     <div class="d-flex">
-                                        <div class="button-ukuran">
+                                        <div class="button-ukuran btn-bani">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_xs_{{$item->id}}" value="xs">
                                             <label class="form-check-label" for="uk_xs_{{$item->id}}">
-                                            <span>XS</span>
+                                            <span style="font-size: 13px" >XS</span>
                                             </label>
                                         </div>
-                                        <div class="button-ukuran">
+                                        <div class="button-ukuran btn-bani">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
-                                            <span>S</span>
+                                            <span style="font-size: 13px" >S</span>
                                             </label>
                                         </div>
-                                        <div class="button-ukuran">
+                                        <div class="button-ukuran btn-bani">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
                                             <label class="form-check-label" for="uk_m_{{$item->id}}">
-                                            <span>M</span>
+                                            <span style="font-size: 13px" >M</span>
                                             </label>
                                         </div>
-                                        <div class="button-ukuran">
+                                        <div class="button-ukuran btn-bani">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
                                             <label class="form-check-label" for="uk_l_{{$item->id}}">
-                                            <span>L</span>
+                                            <span style="font-size: 13px" >L</span>
                                             </label>
                                         </div>
-                                        <div class="button-ukuran">
+                                        <div class="button-ukuran btn-bani">
                                             <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
-                                                <span>XL</span>
+                                                <span style="font-size: 13px" >XL</span>
                                             </label>
                                         </div>
                                     </div>
