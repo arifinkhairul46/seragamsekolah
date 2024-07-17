@@ -73,7 +73,6 @@ class SeragamController extends Controller
            $quantity = $request->quant[$produk_id];
 
            $get_harga = ProdukSeragam::select('harga_awal')->where('id', $produk_id)->first();
-        //    $get_lokasi = Lokasi::select('nama_sekolah')->where('kode_sekolah', $lokasi)->first();
            $get_sekolah = Sekolah::where('id', $lokasi)->first();
 
             $order_detail = DetailOrderSeragam::create([
@@ -91,6 +90,9 @@ class SeragamController extends Controller
             $total_harga += $get_harga->harga_awal * $quantity;
             $total_diskon = 20/100 * $total_harga;
             $harga_akhir = number_format($total_harga - $total_diskon);
+
+            $this->send_pesan_seragam_detail($no_pesanan, $nama_siswa, $lokasi, $nama_kelas, $produk_id, $ukuran, $quantity, $get_harga->harga_awal, 20/100 * $get_harga->harga_awal);
+
        }
 
         $message = "Informasi Pemesanan Seragam Sekolah Rabbani
@@ -120,6 +122,7 @@ Terima kasih atas kepercayaan *Ayah/Bunda $nama_siswa*.🙏☺";
 
         $send_notif = $this->send_notif($no_hp, $message);
 
+        $this->send_pesan_seragam($no_pesanan, $nama_pemesan, $no_hp);
 
         return redirect()->route('invoice', $no_pesanan)->with('success', 'Terimakasih telah melakukan pemesanan seragam');
 
@@ -210,4 +213,66 @@ Terima kasih atas kepercayaan *Ayah/Bunda $nama_siswa*.🙏☺";
         return $response;
 
     }
+
+    function send_pesan_seragam($no_pesanan, $nama_pemesan, $no_hp){
+	    $curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => 'http://103.135.214.11:81/qlp_system/api_regist/simpan_pesan_seragam.php',
+		  CURLOPT_RETURNTRANSFER => 1,
+		  CURLOPT_ENCODING => '',
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => 'POST',
+		  // CURLOPT_SSL_VERIFYPEER => false,
+		  // CURLOPT_SSL_VERIFYHOST => false,
+		  CURLOPT_POSTFIELDS => array(
+		  	'no_pesanan' => $no_pesanan,
+		  	'nama_pemesan' => $nama_pemesan,
+		  	'no_hp' => $no_hp)
+
+		));
+
+		$response = curl_exec($curl);
+
+		// echo $response;
+		curl_close($curl);
+	    // return ($response);
+	}
+
+    function send_pesan_seragam_detail($no_pesanan, $nama_siswa, $lokasi_sekolah, $nama_kelas, $produk_id, $ukuran, $quantity, $harga, $diskon){
+	    $curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => 'http://103.135.214.11:81/qlp_system/api_regist/simpan_pesan_seragam_detail.php',
+		  CURLOPT_RETURNTRANSFER => 1,
+		  CURLOPT_ENCODING => '',
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => 'POST',
+		  // CURLOPT_SSL_VERIFYPEER => false,
+		  // CURLOPT_SSL_VERIFYHOST => false,
+		  CURLOPT_POSTFIELDS => array(
+		  	'no_pesanan' => $no_pesanan,
+		  	'nama_siswa' => $nama_siswa,
+		  	'lokasi_sekolah' => $lokasi_sekolah,
+		  	'nama_kelas' => $nama_kelas,
+		  	'produk_id' => $produk_id,
+		  	'ukuran' => $ukuran,
+		  	'quantity' => $quantity,
+		  	'harga' => $harga,
+		  	'diskon' => $diskon)
+
+		));
+
+		$response = curl_exec($curl);
+
+		// echo $response;
+		curl_close($curl);
+	    // return ($response);
+	}
 }
