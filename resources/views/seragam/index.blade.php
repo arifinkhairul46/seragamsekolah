@@ -53,25 +53,25 @@
                                     <span class="mt-2"> Ukuran </span>
                                     <div class="d-flex" style="justify-content: center">
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="S">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
                                             <span>S </span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="M">
                                             <label class="form-check-label" for="uk_m_{{$item->id}}">
                                             <span>M </span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="L">
                                             <label class="form-check-label" for="uk_l_{{$item->id}}">
                                             <span>L </span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="XL">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
                                                 <span>XL</span>
                                             </label>
@@ -123,25 +123,25 @@
                                     <span> Ukuran </span>
                                     <div class="d-flex" style="justify-content: center">
                                         <div class="button-ukuran" >
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="S">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
                                             <span>    S </span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="M">
                                             <label class="form-check-label" for="uk_m_{{$item->id}}">
                                             <span>    M </span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="L">
                                             <label class="form-check-label" for="uk_l_{{$item->id}}">
                                             <span>    L </span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="XL">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
                                                 <span>    XL </span>
                                             </label>
@@ -192,25 +192,25 @@
                                     <span> Ukuran </span>
                                     <div class="d-flex" style="justify-content: center">
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="S">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
                                             <span>S</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="M">
                                             <label class="form-check-label" for="uk_m_{{$item->id}}">
                                             <span>M</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="L">
                                             <label class="form-check-label" for="uk_l_{{$item->id}}">
                                             <span>L</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="XL">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
                                                 <span>XL</span>
                                             </label>
@@ -261,31 +261,31 @@
                                     <span> Ukuran </span>
                                     <div class="d-flex" style="justify-content: center">
                                         <div class="button-ukuran btn-bani">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_xs_{{$item->id}}" value="xs">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_xs_{{$item->id}}" value="XS">
                                             <label class="form-check-label" for="uk_xs_{{$item->id}}">
                                             <span style="font-size: 13px" >XS</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran btn-bani">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="s">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}"  id="uk_s_{{$item->id}}" value="S">
                                             <label class="form-check-label" for="uk_s_{{$item->id}}">
                                             <span style="font-size: 13px" >S</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran btn-bani">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="m">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_m_{{$item->id}}" value="M">
                                             <label class="form-check-label" for="uk_m_{{$item->id}}">
                                             <span style="font-size: 13px" >M</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran btn-bani">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="l">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_l_{{$item->id}}" value="L">
                                             <label class="form-check-label" for="uk_l_{{$item->id}}">
                                             <span style="font-size: 13px" >L</span>
                                             </label>
                                         </div>
                                         <div class="button-ukuran btn-bani">
-                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="xl">
+                                            <input class="form-check-input" type="radio" name="ukuran_{{$item->id}}" id="uk_xl_{{$item->id}}" value="XL">
                                             <label class="form-check-label" for="uk_xl_{{$item->id}}">
                                                 <span style="font-size: 13px" >XL</span>
                                             </label>
